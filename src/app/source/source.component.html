@@ -1,0 +1,14 @@
+<!-- HEADER -->
+<h3 class="mt-4 ml-2">Source Javascript Code (ES6)
+  <small class="text-muted">Copy and execute on console to see the result</small>
+</h3>
+<!-- SOURCE CODE SECTION -->
+<div class="row mt-4">
+  <!-- WARNING SECTION -->
+  <div class="alert alert-warning ml-5 col-10" role="alert" *ngIf="sourceCode==''">
+    No Mapping Found.
+  </div>
+  <pre class="ml-5 col-10 row">
+      <code *ngIf="sourceCode!=''">{{ sourceCode }}</code>
+    </pre>
+</div>

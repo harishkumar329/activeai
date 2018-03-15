@@ -1,0 +1,25 @@
+<!-- TITLE SECTION -->
+<h3 class="mt-4 ml-2">Test API Against Mapping</h3>
+<!-- ALERT AND WARNING MESSAGES -->
+<div class="alert alert-danger ml-2 col-8" role="alert" *ngIf="ms.showAlert">
+  {{ ms.alert }}
+</div>
+<!-- WARNING -->
+<div *ngIf="ms.jsonMapping==''" class="alert alert-warning ml-4 col-10 mt-4" role="alert">
+    No Mapping Found.
+</div>
+<!-- TEXT BOX AND FETCH BUTTON SECTION -->
+<div *ngIf="ms.jsonMapping!=''" class="row mt-4">
+    <div class="col-8">
+        <div class="row ml-2">
+          <div class="input-group input-group-sm col-6">
+            <input #testurl type="text" class="form-control" value="https://jsonplaceholder.typicode.com/users/" placeholder="Please enter the URL">
+          </div>
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="testMapping()">Test JSON Mapping</button>
+        </div>
+    </div>
+</div>
+<!-- TEST RESULTS SECTION -->
+<div class="row mt-2 col-12 ml-2">
+  <pre class="col-3" *ngFor="let json of testResult" [innerHTML]="json"></pre>
+</div>

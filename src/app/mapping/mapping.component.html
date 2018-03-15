@@ -1,0 +1,57 @@
+<!-- TITLE SECTION -->
+<h3 class="mt-4 ml-2">API JSON Format to User JSON Format Mapping Tool</h3>
+<!-- ALERT MESSAGE SECTION -->
+<div class="alert alert-danger ml-5 col-8" role="alert" *ngIf="ms.showAlert">
+  {{ ms.alert }}
+</div>
+<!-- MAPPING DISPLAY SECTION -->
+<div class="row mb-5">
+  <!-- TEXT FIELD AND BUTTON SECTION -->
+  <div class="col-8 mt-4">
+    <div class="row ml-2">
+      <div class="input-group input-group-sm col-6">
+        <input #apiurl value="https://jsonplaceholder.typicode.com/users/1" type="text" class="form-control" placeholder="API URL"
+          aria-label="url" aria-describedby="basic-addon1">
+      </div>
+      <button type="button" class="btn btn-outline-success btn-sm" (click)="fetchURL()">Fetch API JSON Template</button>
+    </div>
+  </div>
+  <!-- TEXT FIELD AND BUTTON SECTION END -->
+  <!-- LHS DRAGGABLE SECTION -->
+  <div class="col-5 ml-4 mt-4">
+      <div class="card">
+        <h5 class="card-header">API JSON Template</h5>
+        <div class="card-body">
+          <ng-container *ngTemplateOutlet="jsonelement;context:{'input':apiPayload,'type':'drag','base':''}"></ng-container>
+        </div>
+    </div>
+  </div>
+  <!-- RHS DROPPABLE SECTION -->
+  <div class="col-5 ml-4 mt-4">
+      <div class="card">
+        <h5 class="card-header">User JSON Template</h5>
+        <div class="card-body">
+            <ng-container *ngTemplateOutlet="jsonelement;context:{'input':userPayload,'type':'drop','base':''}"></ng-container>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- MAPPING DISPLAY SECTION END -->
+
+<!-- TEMPLATE FIELD TO DISPLAY THE JSON IN A JSON -->
+<!-- HAVING KEY IN THE LHS:(DRAG/DROP FIELD) IN RHS -->
+<ng-template let-obj="input" let-type="type" let-baseKey="base" #jsonelement>
+  <div *ngFor="let key of generateArray(obj)" class="mt-2 mb-2">
+    <ng-container *ngIf="isObject(obj[key])">
+      <span>{{ key }}</span>:
+      <div class="ml-5">
+        <ng-container *ngTemplateOutlet="jsonelement;context:{'input':obj[key],'type':type,'base':{'base':baseKey,'key':key}}"></ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!isObject(obj[key])">
+      <span>{{ key }}</span>:
+        <span class="draggable ml-2" *ngIf="type=='drag'" draggable [dragData]="{'path':{'base':baseKey,'key':key},'data':key}"><<{{ key }}>></span>
+        <span *ngIf="type=='drop'" droppable class="droppable ml-2" (onDrop)="onItemDrop($event,{'base':baseKey,'key':key})" [dragOverClass]="'drag-target-border'"><span *ngIf="ms.defaultValue[key]">{{ ms.defaultValue[key] }}</span></span>
+    </ng-container>
+  </div>
+</ng-template>

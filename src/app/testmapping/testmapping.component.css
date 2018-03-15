@@ -1,0 +1,20 @@
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 10px;
+}
+::ng-deep .string {
+  color: green;
+}
+::ng-deep .number {
+  color: darkorange;
+}
+::ng-deep .boolean {
+  color: blue;
+}
+::ng-deep .null {
+  color: magenta;
+}
+::ng-deep .key {
+  color: red;
+}

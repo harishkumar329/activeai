@@ -1,0 +1,14 @@
+.droppable{
+    min-width: 150px;
+    height: 24px;
+    display: inline-block;
+    border-bottom: 1px dashed #aaa;
+    text-align: center;
+}
+.drag-border {
+    padding: 2px 5px;
+}
+.draggable {
+    border: 2px dashed #aaa;
+    padding: 2px 5px;
+}
